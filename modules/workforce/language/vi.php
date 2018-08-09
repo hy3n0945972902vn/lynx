@@ -64,6 +64,11 @@ $lang_module['bonus'] = 'Thưởng';
 $lang_module['deduction'] = 'Tổng các khoản trừ';
 $lang_module['received'] = 'Thực nhận';
 $lang_module['time'] = 'Thời gian';
+$lang_module['useradd'] = 'Người thêm vào';
+$lang_module['status'] = 'Trạng thái';
+$lang_module['partid'] = 'Thuộc bộ phận';
+$lang_module['status_1'] = 'Hoạt động';
+$lang_module['status_0'] = 'Ngưng hoạt động';
 
 $lang_module['error_required_userid'] = 'Lỗi: bạn cần chọn Tài khoản thành viên';
 $lang_module['error_required_first_name'] = 'Lỗi: bạn cần nhập dữ liệu cho Tên';

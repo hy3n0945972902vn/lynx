@@ -6,18 +6,29 @@
  * @Copyright (C) 2018 TDFOSS.,LTD. All rights reserved
  * @Createdate Sat, 05 May 2018 23:45:39 GMT
  */
+if (!defined('NV_IS_MOD_WORKFORCE')) die('Stop!!!');
 
-if ( ! defined( 'NV_IS_MOD_WORKFORCE' ) ) die( 'Stop!!!' );
+$id = $nv_Request->get_int('id', 'get', 0);
 
-$page_title = $module_info['custom_title'];
-$key_words = $module_info['keywords'];
+$result = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . ' WHERE id = ' . $id)->fetch();
+if(!$result){
+    nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name);
+}
+$result['fullname'] = nv_show_name_user($result['first_name'], $result['last_name']);
+$result['gender'] = $array_gender[$result['gender']];
+$result['status'] = $lang_module['status_' . $result['status']];
+$result['addtime'] = nv_date('H:i d/m/Y', $result['addtime']);
+$result['edittime'] = !empty($result['edittime']) ? nv_date('H:i d/m/Y', $result['edittime']) : '';
+$result['birthday'] = !empty($result['birthday']) ? nv_date('d/m/Y', $result['birthday']) : '';
 
-$array_data = array();
+$xtpl = new XTemplate($op . '.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_file);
+$xtpl->assign('LANG', $lang_module);
+$xtpl->assign('WORKFORCE', $result);
 
 
-
-$contents = nv_theme_workforce_detail( $array_data );
+$xtpl->parse('main');
+$contents = $xtpl->text('main');
 
 include NV_ROOTDIR . '/includes/header.php';
-echo nv_site_theme( $contents );
+echo nv_site_theme($contents);
 include NV_ROOTDIR . '/includes/footer.php';
