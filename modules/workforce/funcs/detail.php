@@ -20,6 +20,7 @@ $result['status'] = $lang_module['status_' . $result['status']];
 $result['addtime'] = nv_date('H:i d/m/Y', $result['addtime']);
 $result['edittime'] = !empty($result['edittime']) ? nv_date('H:i d/m/Y', $result['edittime']) : '';
 $result['birthday'] = !empty($result['birthday']) ? nv_date('d/m/Y', $result['birthday']) : '';
+$result['jointime'] = nv_date('d/m/Y', $result['jointime']);
 
 $xtpl = new XTemplate($op . '.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_file);
 $xtpl->assign('LANG', $lang_module);
